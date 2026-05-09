@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Meaningless idea",
+    "input": {
+      "name": "Test",
+      "description": "I want to make a website that does stuff",
+      "category": "Other",
+      "team_size": 1,
+      "duration": "24h",
+      "stage": "Idea"
+    },
+    "expected_min_score": 25,
+    "expected_max_score": 50,
+    "must_include": ["weak_points", "improvements"]
+  },
+  {
+    "name": "Weak idea",
+    "input": {
+      "name": "TaskApp",
+      "description": "A mobile app for managing daily tasks with reminders and notifications. Users can create lists and check items off.",
+      "category": "Productivity",
+      "team_size": 2,
+      "duration": "48h",
+      "stage": "Concept"
+    },
+    "expected_min_score": 40,
+    "expected_max_score": 62,
+    "must_include": ["weak_points", "tech_stack"]
+  },
+  {
+    "name": "Average idea",
+    "input": {
+      "name": "EduBot",
+      "description": "AI chatbot for students that answers questions about school subjects, generates quizzes, and tracks progress. Uses GPT API.",
+      "category": "Education",
+      "team_size": 3,
+      "duration": "48h",
+      "stage": "Prototype"
+    },
+    "expected_min_score": 58,
+    "expected_max_score": 76,
+    "must_include": ["improvements", "mvp_plan"]
+  },
+  {
+    "name": "Good idea",
+    "input": {
+      "name": "CityPulse",
+      "description": "Real-time IoT platform that aggregates data from city sensors (air quality, traffic, noise) and uses ML to predict urban issues 24h in advance. Citizens get alerts, city managers get dashboards.",
+      "category": "Smart City",
+      "team_size": 4,
+      "duration": "72h",
+      "stage": "MVP"
+    },
+    "expected_min_score": 72,
+    "expected_max_score": 86,
+    "must_include": ["thirty_second_pitch", "judge_reason"]
+  },
+  {
+    "name": "Strong idea",
+    "input": {
+      "name": "GovAutomate",
+      "description": "AI system for automating government document processing. Citizens upload documents, AI extracts data, validates against regulations, auto-fills forms, and routes to correct department. Reduces processing time from 2 weeks to 2 hours. Built on existing government APIs.",
+      "category": "Government",
+      "team_size": 4,
+      "duration": "72h",
+      "stage": "MVP"
+    },
+    "expected_min_score": 80,
+    "expected_max_score": 95,
+    "must_include": ["better_version", "growth_potential"]
+  },
+  {
+    "name": "Confusing idea",
+    "input": {
+      "name": "BlockchainAIMetaverse",
+      "description": "Blockchain meets AI in metaverse for decentralized autonomous digital twin robot automation with NFT rewards for citizens who contribute data to smart city neural network.",
+      "category": "Web3",
+      "team_size": 2,
+      "duration": "48h",
+      "stage": "Idea"
+    },
+    "expected_min_score": 30,
+    "expected_max_score": 60,
+    "must_include": ["weak_points", "improvements"]
+  }
+]

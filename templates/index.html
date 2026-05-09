@@ -1,0 +1,500 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ProjectBoost AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="/static/style.css?v=20260509-score-breakdown-fix2">
+</head>
+<body data-plan="free">
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div id="demo-banner" class="demo-banner" aria-hidden="true">
+    <span class="demo-banner-dot"></span>
+    DEMO MODE ACTIVE - Simulated AI responses
+    <span class="demo-banner-dot"></span>
+  </div>
+  <div class="page wrapper">
+    <nav class="navbar" aria-label="Primary">
+      <div class="logo gradient-text">⚡ ProjectBoost AI</div>
+      <div class="nav-actions">
+        <div class="plan-toggle nav-pills" aria-label="View mode">
+          <span class="active-pill" aria-hidden="true"></span>
+          <button class="plan-btn pill-btn" type="button" data-plan-choice="free">Free</button>
+          <button class="plan-btn pill-btn pro-btn" type="button" data-plan-choice="pro" onclick="openProModal()">Pro Version</button>
+        </div>
+        <button id="btn-demo-mode" class="btn-demo-mode" type="button" onclick="toggleDemoMode()">
+          ◈ Demo Mode
+        </button>
+        <div class="language-toggle" aria-label="Language">
+          <button class="lang-btn" type="button" data-lang-choice="en">EN</button>
+          <button class="lang-btn" type="button" data-lang-choice="ru">RU</button>
+        </div>
+        <span class="pro-badge">Pro Active</span>
+      </div>
+    </nav>
+
+    <main class="main-grid">
+      <section class="hero" aria-labelledby="heroTitle">
+        <span class="eyebrow hero-eyebrow"><span class="dot"></span> Hackathon Edition</span>
+        <div class="hero-title-wrapper" data-text="ProjectBoost AI">
+          <h1 class="hero-title" id="heroTitle">ProjectBoost AI</h1>
+        </div>
+        <p class="subtitle hero-sub">AI-powered project evaluator built specifically for hackathons. Get scored, get roasted, get better.</p>
+
+        <div class="hero-tags" aria-label="ProjectBoost use cases">
+          <span class="hero-tag">Hackathons</span>
+          <span class="hero-tag">Startups</span>
+          <span class="hero-tag">MVP</span>
+          <span class="hero-tag">Pitch</span>
+          <span class="hero-tag">Business Ideas</span>
+          <span class="hero-tag">Presentations</span>
+        </div>
+
+        <div class="stats" aria-label="ProjectBoost AI highlights">
+          <article class="stat-card">
+            <span class="stat-value">8 Criteria</span>
+            <span class="stat-label">scored by judges</span>
+          </article>
+          <article class="stat-card">
+            <span class="stat-value">30 sec</span>
+            <span class="stat-label">pitch generated</span>
+          </article>
+          <article class="stat-card">
+            <span class="stat-value">MVP Plan</span>
+            <span class="stat-label">ready to build</span>
+          </article>
+        </div>
+
+        <section class="card how-card" aria-labelledby="howTitle">
+          <h2 class="section-title" id="howTitle">How it works</h2>
+          <div class="steps">
+            <div class="step">
+              <span class="step-number">1</span>
+              <strong>Submit</strong>
+              <span>Describe your hackathon idea with the essentials.</span>
+            </div>
+            <div class="step">
+              <span class="step-number">2</span>
+              <strong>Analyze</strong>
+              <span>Get scored across judge-style criteria.</span>
+            </div>
+            <div class="step">
+              <span class="step-number">3</span>
+              <strong>Win</strong>
+              <span>Use the critique, pitch, and MVP plan to sharpen the demo.</span>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section class="card form-card" id="main-form" aria-labelledby="formTitle">
+        <h2 id="formTitle">Analyze Your Project</h2>
+        <div class="mode-toggle-wrap">
+          <div class="mode-toggle">
+            <button class="mode-btn active" id="btn-hackathon" type="button" onclick="setMode('hackathon')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+              </svg>
+              Hackathon Mode
+            </button>
+            <button class="mode-btn" id="btn-startup" type="button" onclick="setMode('startup')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                <path d="M2 17l10 5 10-5"/>
+                <path d="M2 12l10 5 10-5"/>
+              </svg>
+              Startup Mode
+            </button>
+          </div>
+        </div>
+        <form id="analysisForm">
+          <input type="hidden" name="analysis_mode" id="analysis_mode" value="hackathon">
+          <div id="hackathon-fields">
+          <div class="form-section-title">Core information</div>
+          <div class="form-grid">
+          <div class="field">
+            <label for="projectName">Project Name</label>
+            <input id="projectName" name="name" type="text" placeholder="e.g. CityPulse AI" autocomplete="off">
+          </div>
+
+          <div class="field">
+            <label for="projectCategory">Category</label>
+            <select id="projectCategory" name="category">
+              <option>Smart City</option>
+              <option>Government</option>
+              <option>Healthcare</option>
+              <option>Education</option>
+              <option>Finance</option>
+              <option>Transport</option>
+              <option>Environment</option>
+              <option>Productivity</option>
+              <option>Other</option>
+            </select>
+          </div>
+          </div>
+
+          <div class="form-grid">
+          <div class="field form-full">
+            <label for="projectDescription">Description</label>
+            <textarea id="projectDescription" name="description" rows="4" placeholder="Describe your idea in detail... What problem does it solve? How does it work? What makes it unique?"></textarea>
+          </div>
+          </div>
+
+          <div class="form-section-title">Hackathon details</div>
+          <div class="form-row form-grid cols-3">
+            <div class="field">
+              <label for="teamSize">Team Size</label>
+              <input id="teamSize" name="team_size" type="number" min="1" max="10" value="3">
+            </div>
+
+            <div class="field">
+              <label for="projectStage">Stage</label>
+              <select id="projectStage" name="stage">
+                <option>Idea</option>
+                <option>Concept</option>
+                <option>Prototype</option>
+                <option>MVP</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="hackathonDuration">Hackathon Duration</label>
+              <select id="hackathonDuration" name="duration">
+                <option>24 hours</option>
+                <option>48 hours</option>
+                <option>72 hours</option>
+                <option>1 week</option>
+              </select>
+            </div>
+          </div>
+          </div>
+
+          <div id="startup-fields" style="display:none;">
+            <div class="form-section-title">Core information</div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="startupName">Project Name</label>
+                <input id="startupName" name="startup_name" type="text" placeholder="e.g. MedAssist AI" autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="devStage">Development Stage</label>
+                <select id="devStage" name="dev_stage">
+                  <option>Idea</option>
+                  <option>Prototype</option>
+                  <option>MVP</option>
+                  <option>Early traction</option>
+                  <option>Growth</option>
+                  <option>Scale</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="field form-full">
+                <label for="startupDescription">Project Description</label>
+                <textarea id="startupDescription" name="startup_description" placeholder="What are you building, who is it for, and what makes it unique?"></textarea>
+              </div>
+            </div>
+
+            <div class="form-section-title">Market and audience</div>
+            <div class="form-grid">
+              <div class="field">
+                <label for="targetAudience">Target Audience</label>
+                <input id="targetAudience" name="target_audience" type="text" placeholder="B2C / B2B, segment, buyer...">
+              </div>
+              <div class="field">
+                <label for="marketProblem">Market Problem</label>
+                <input id="marketProblem" name="market_problem" type="text" placeholder="What does not work today?">
+              </div>
+              <div class="field">
+                <label for="uniqueness">Product Uniqueness</label>
+                <input id="uniqueness" name="uniqueness" type="text" placeholder="Your competitive advantage...">
+              </div>
+              <div class="field">
+                <label for="competitors">Competitors</label>
+                <input id="competitors" name="competitors" type="text" placeholder="Airbnb, Booking.com, Uber...">
+              </div>
+            </div>
+
+            <div class="form-section-title">Business and team</div>
+            <div class="form-grid cols-3">
+              <div class="field">
+                <label for="monetization">Monetization</label>
+                <select id="monetization" name="monetization">
+                  <option>Subscription (SaaS)</option>
+                  <option>Freemium</option>
+                  <option>Marketplace</option>
+                  <option>Enterprise</option>
+                  <option>Ads</option>
+                  <option>Other</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="mvpStatus">MVP Status</label>
+                <select id="mvpStatus" name="mvp_status">
+                  <option>No MVP</option>
+                  <option>In development</option>
+                  <option>Ready, no users yet</option>
+                  <option>First users</option>
+                  <option>Revenue generating</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="fundingStage">Funding Stage</label>
+                <select id="fundingStage" name="funding_stage">
+                  <option>Bootstrapped</option>
+                  <option>Pre-seed</option>
+                  <option>Seed</option>
+                  <option>Series A</option>
+                  <option>Series B+</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="startupTeamSize">Team Size</label>
+                <select id="startupTeamSize" name="startup_team_size">
+                  <option>1 solo founder</option>
+                  <option>2-3 people</option>
+                  <option>4-6 people</option>
+                  <option>7-15 people</option>
+                  <option>15+ people</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="growthPotential">Growth Potential</label>
+                <select id="growthPotential" name="growth_potential">
+                  <option>Local market</option>
+                  <option>National market</option>
+                  <option>Global market</option>
+                  <option>Network effects</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="analyze-wrap">
+            <button class="submit-btn btn-analyze" id="submitBtn" type="submit">✦ Analyze Project</button>
+          </div>
+          <p class="free-note">Free plan: 2 analyses per day. Upgrade for unlimited.</p>
+          <div class="error-message" id="formError" role="alert"></div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <div class="loading-overlay" id="loadingOverlay" aria-live="polite" aria-hidden="true">
+    <div class="loading-box">
+      <div class="spinner" aria-hidden="true"></div>
+      <p class="loading-message" id="loadingMessage">🔍 Analyzing your idea...</p>
+      <p class="loading-subtitle">This takes 5-15 seconds</p>
+    </div>
+  </div>
+
+  <section class="results" id="resultsSection" aria-live="polite">
+    <article class="card score-header">
+      <div class="score-number gradient-text" id="scoreNumber">0</div>
+      <div>
+        <span class="level-badge" id="levelBadge">Idea</span>
+        <p class="summary-text" id="summaryText"></p>
+        <div class="warning-banner" id="fallbackWarning">Offline fallback analysis is active</div>
+      </div>
+    </article>
+
+    <article class="card full-card chart-wrap">
+      <h2 class="section-title">Score Breakdown</h2>
+      <canvas id="radarChart"></canvas>
+      <div class="score-breakdown-chart is-placeholder" id="scoreBreakdownChart">
+        <p class="score-breakdown-placeholder" id="scoreBreakdownPlaceholder">Score breakdown will appear after analysis</p>
+      </div>
+    </article>
+
+    <div class="result-grid">
+      <article class="card result-card accent-green">
+        <h3>✅ Strong Points</h3>
+        <ul id="strongPointsList"></ul>
+      </article>
+      <article class="card result-card accent-red">
+        <h3>⚠️ Weak Points</h3>
+        <ul id="weakPointsList"></ul>
+      </article>
+      <article class="card result-card accent-blue">
+        <h3>💡 Improvements</h3>
+        <ul id="improvementsList"></ul>
+      </article>
+      <article class="card result-card accent-purple">
+        <h3>🚀 Better Version</h3>
+        <p class="plain-text" id="betterVersionText"></p>
+      </article>
+    </div>
+
+    <article class="card full-card">
+      <h2 class="section-title">MVP Plan</h2>
+      <div class="timeline" id="mvpPlanTimeline"></div>
+    </article>
+
+    <article class="card full-card">
+      <h2 class="section-title">Team Roles</h2>
+      <div class="tags" id="teamRolesTags"></div>
+    </article>
+
+    <section class="pro-section" aria-label="Pro insights">
+      <div class="pro-lock">
+        <div class="lock-box">
+          <div class="lock-icon">🔒</div>
+          <p>Upgrade to Pro to unlock</p>
+          <button class="primary-action" type="button" data-upgrade-button>Upgrade to Pro</button>
+        </div>
+      </div>
+
+      <div class="pro-content">
+        <div class="pro-grid">
+          <article class="card result-card copy-card">
+            <div class="card-header-row">
+              <h3>🎤 30-Second Pitch</h3>
+              <button class="copy-btn" type="button" data-copy-target="thirtySecondPitchText">Copy</button>
+            </div>
+            <p class="pro-text" id="thirtySecondPitchText"></p>
+          </article>
+          <article class="card result-card copy-card">
+            <div class="card-header-row">
+              <h3>🎤 1-Minute Pitch</h3>
+              <button class="copy-btn" type="button" data-copy-target="oneMinutePitchText">Copy</button>
+            </div>
+            <p class="pro-text" id="oneMinutePitchText"></p>
+          </article>
+          <article class="card result-card">
+            <h3>🛠️ Tech Stack</h3>
+            <ul id="techStackList"></ul>
+          </article>
+          <article class="card result-card">
+            <h3>⚖️ Why Judges Will Choose This</h3>
+            <p class="pro-text" id="judgeReasonText"></p>
+          </article>
+          <article class="card result-card">
+            <h3>🧬 Idea DNA</h3>
+            <div class="dna-grid" id="ideaDnaGrid"></div>
+          </article>
+          <article class="card result-card">
+            <h3>📈 Growth Potential</h3>
+            <div class="growth-grid" id="growthPotentialGrid"></div>
+          </article>
+          <article class="card result-card">
+            <h3>🎬 Demo Idea</h3>
+            <p class="pro-text" id="demoIdeaText"></p>
+          </article>
+          <article class="card result-card">
+            <h3>💡 Demo Warning</h3>
+            <div class="demo-warning" id="demoWarningText"></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pro-section compare-card" aria-label="Compare mode">
+      <div class="pro-lock">
+        <div class="lock-box">
+          <div class="lock-icon">🔒</div>
+          <p>Upgrade to Pro to unlock</p>
+          <button class="primary-action" type="button" data-upgrade-button>Upgrade to Pro</button>
+        </div>
+      </div>
+
+      <div class="pro-content card full-card">
+        <h2 class="section-title">Compare Mode</h2>
+        <div class="compare-panels">
+          <div class="compare-panel">
+            <h4>Your Original Idea</h4>
+            <p class="plain-text" id="originalIdeaText"></p>
+          </div>
+          <div class="compare-panel">
+            <h4>Improved Version</h4>
+            <p class="plain-text" id="improvedIdeaText"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="actions-row">
+      <button class="secondary-action" type="button" id="analyzeAnotherBtn">🔄 Analyze Another</button>
+      <button class="secondary-action" type="button" id="copyReportBtn">📋 Copy Full Report</button>
+    </div>
+  </section>
+
+  <section class="card quality-panel" id="qualityPanel">
+    <button class="qc-toggle" type="button" id="qualityToggle">🔬 AI Quality Check — click to expand</button>
+    <div class="qc-content">
+      <button class="primary-action qc-run" type="button" id="runQualityCheckBtn">Run Quality Check</button>
+      <div class="qc-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Test Name</th>
+              <th>Expected Range</th>
+              <th>Actual Score</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="qualityResultsBody"></tbody>
+        </table>
+      </div>
+      <p class="qc-summary" id="qualitySummaryText"></p>
+    </div>
+  </section>
+
+  <div class="modal-overlay" id="pro-modal" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="proModalTitle">
+      <div class="modal-header">
+        <div class="modal-title" id="proModalTitle">Upgrade to Pro</div>
+        <button class="modal-close" type="button" onclick="closeProModal()" aria-label="Close">x</button>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <div class="price-tier">Free</div>
+          <div class="price-amount"><span class="currency">$</span>0</div>
+          <div class="price-period">free forever</div>
+          <ul class="feature-list">
+            <li><span class="fi cross">x</span> <span class="striked">Full AI analysis</span></li>
+            <li><span class="fi cross">x</span> <span class="striked">Startup + Hackathon modes</span></li>
+            <li><span class="fi cross">x</span> <span class="striked">Competitor analysis</span></li>
+            <li><span class="fi cross">x</span> <span class="striked">Pitch preparation</span></li>
+            <li><span class="fi cross">x</span> <span class="striked">Monetization analysis</span></li>
+            <li><span class="fi cross">x</span> <span class="striked">Startup roadmap</span></li>
+            <li><span class="fi check">✓</span> Basic idea analysis</li>
+            <li><span class="fi check">✓</span> 2 analyses per day</li>
+            <li><span class="fi check">✓</span> Demo Mode</li>
+          </ul>
+        </div>
+
+        <div class="price-card pro">
+          <div class="price-tier pro-tier">Pro</div>
+          <div class="price-amount"><span class="currency">$</span>6.79</div>
+          <div class="price-period">per month, cancel anytime</div>
+          <ul class="feature-list">
+            <li><span class="fi check">✓</span> Full AI project analysis</li>
+            <li><span class="fi check">✓</span> Startup + Hackathon modes</li>
+            <li><span class="fi check">✓</span> Faster AI responses</li>
+            <li><span class="fi check">✓</span> Deeper idea analysis</li>
+            <li><span class="fi check">✓</span> Competitor analysis</li>
+            <li><span class="fi check">✓</span> Pitch preparation</li>
+            <li><span class="fi check">✓</span> Monetization analysis</li>
+            <li><span class="fi check">✓</span> Startup roadmap</li>
+            <li><span class="fi check">✓</span> Unlimited requests</li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="btn-upgrade" type="button" data-pro-modal-upgrade>✦ Upgrade to Pro - $6.79/month</button>
+    </div>
+  </div>
+
+  <script src="/static/script.js?v=20260509-score-breakdown-fix2"></script>
+</body>
+</html>
+
